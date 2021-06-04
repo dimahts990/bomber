@@ -1,30 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class playerAttackSystem : MonoBehaviour
 {
-    public GameObject Bullet;
-    public float Angle;
+    [SerializeField] private Transform handTransform, spawnBulletTransform, viewInventory;
+    [SerializeField] private LineRenderer grenadeTrajectory;
+    [SerializeField] private PlayerMove PlayerMove;
+
+    public GameObject ActiveGrenadeGameObject;
     public int SizePointsInLineTrajectory = 100;
-
-    PlayerMove PlayerMove;
-    LineRenderer bulletTrajectory;
-
-    Transform handTransform, spawnBulletTransform;
-    Vector3 fromTo, fromToXZ;
-
-    float g = Physics.gravity.y, vShot;
-    bool shotReady = false;
-
-    private void Awake()
-    {
-        handTransform = transform.GetChild(0);
-        spawnBulletTransform = handTransform.GetChild(0);
-        bulletTrajectory = spawnBulletTransform.GetComponent<LineRenderer>();
-        PlayerMove = GetComponent<PlayerMove>();
-    }
-
+    private float g = Physics.gravity.y, vShot;
+    private Vector3 fromTo, fromToXZ;
+    private bool shotReady = false;
+    public float Angle;
+    
     private void Update()
     {
         handTransform.localEulerAngles = new Vector3(Angle, 0f, 0f);
@@ -32,7 +23,7 @@ public class playerAttackSystem : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (GetComponent<PlayerManager>().Inventory.Grenades.Count > 0)
+        if (viewInventory.childCount != 0)
         {
             if (Input.GetMouseButton(0) && Physics.Raycast(ray, out hit))
                 takeAim(hit.point);
@@ -65,16 +56,25 @@ public class playerAttackSystem : MonoBehaviour
         showTrajectory(spawnBulletTransform.position, spawnBulletTransform.forward * vShot);
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     void Shot()
     {
-        GameObject newBullet = Instantiate(Bullet, spawnBulletTransform.position, Quaternion.identity);
-        newBullet.GetComponent<Rigidbody>().velocity = spawnBulletTransform.forward * vShot;
-        
+        if (ActiveGrenadeGameObject != null)
+        {
+            ActiveGrenadeGameObject.transform.position = spawnBulletTransform.position;
+            ActiveGrenadeGameObject.transform.SetParent(null);
+            ActiveGrenadeGameObject.SetActive(true);
+            ActiveGrenadeGameObject.GetComponent<Rigidbody>().velocity = spawnBulletTransform.forward * vShot;
+            viewInventory.GetChild(viewInventory.GetComponent<Inventory>().SelectedActiveInt).GetComponent<InventoryCell>().Inject();
+            ActiveGrenadeGameObject = null;
+        }
+        else Debug.Log("Active Grenade GameObject is null");
         shotReady = false;
         PlayerMove.enabled = true;
+        clearTrajectory();
     }
-
-    void showTrajectory(Vector3 origin, Vector3 speed)
+    
+    private void showTrajectory(Vector3 origin, Vector3 speed)
     {
         Vector3[] points = new Vector3[SizePointsInLineTrajectory];
 
@@ -84,11 +84,13 @@ public class playerAttackSystem : MonoBehaviour
             points[i] = origin + speed * time + Physics.gravity * time * time / 2f;
             if (points[i].y < 0)
             {
-                bulletTrajectory.positionCount = i + 1;
+                grenadeTrajectory.positionCount = i + 1;
                 break;
             }
         }
-        bulletTrajectory.SetPositions(points);
+        grenadeTrajectory.SetPositions(points);
     }
+
+    private void clearTrajectory() => grenadeTrajectory.positionCount = 0;
 }
 

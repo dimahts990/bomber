@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public interface GrenadeInfo
 {
-    public bool GrabTrue;
+    string name { get; }
+    Sprite Icon { get; }
 }

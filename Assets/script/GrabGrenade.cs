@@ -8,6 +8,9 @@ public class GrabGrenade : MonoBehaviour
     public float Radius;
     SphereCollider grabCollider;
 
+    [SerializeField]
+    private Inventory _inventory;
+
     private void Awake()
     {
         grabCollider = GetComponent<SphereCollider>();
@@ -20,9 +23,12 @@ public class GrabGrenade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Grenade>() && other.GetComponent<Grenade>().GrabTrue)
+        if (other.GetComponent<GrenadeObject>() && other.GetComponent<GrenadeObject>().ReadyToGrab)
         {
-            transform.parent.GetComponent<PlayerManager>().Inventory.AddGrenade(other.gameObject);
+            other.GetComponent<GrenadeObject>().ReadyToGrab = false;
+            other.gameObject.SetActive(false);
+            other.transform.SetParent(transform);
+            _inventory.AddInventory(other.GetComponent<GrenadeObject>()._assetGrenade, other.gameObject);
         }
     }
 }
