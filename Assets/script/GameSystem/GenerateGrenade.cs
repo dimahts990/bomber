@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class GenerateGrenade : MonoBehaviour
 {
-    public float timerReSpawnGrenade;
-    public int MaxReSpawnQuantityGrenade;
-    public GameObject[] Grenade;
     public Transform worldBorderXZ, worldBorderMinusXZ;
+    public int MaxReSpawnQuantityGrenade;
+    public float timerReSpawnGrenade;
+    public GameObject[] Grenade;
     
     private void OnEnable()
     {
         StartCoroutine(Spawn());
     }
 
+    public void GenerateNewGrenate(Vector3 position)
+    {
+        StartCoroutine(SpawnNewGrenate(position));
+    }
+    
     private IEnumerator Spawn()
     {
         int quantityReSpawnNPC = Random.Range(1, MaxReSpawnQuantityGrenade);
@@ -26,6 +31,14 @@ public class GenerateGrenade : MonoBehaviour
             Instantiate(Grenade[grenadeType], spawnPosition, Quaternion.identity);
         }
         yield return new WaitForSeconds(timerReSpawnGrenade);
-        StartCoroutine(Spawn());
     }
+
+    private IEnumerator SpawnNewGrenate(Vector3 pos)
+    {
+        yield return new WaitForSeconds(timerReSpawnGrenade);
+        
+        int grenadeType = Random.Range(0, Grenade.Length);
+        Instantiate(Grenade[grenadeType], pos, Quaternion.identity);
+    }
+
 }

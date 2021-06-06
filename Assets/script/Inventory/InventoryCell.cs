@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InventoryCell : MonoBehaviour
 {
-    //public AssetGrenade _AssetGrenade;
     [SerializeField] private Text _name;
     [SerializeField] private Image _icon;
     [SerializeField] private Image _selectIcon;

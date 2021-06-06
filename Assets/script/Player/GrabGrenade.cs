@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class GrabGrenade : MonoBehaviour
 {
-    [Range (1f,3f)]
-    public float Radius;
+    [SerializeField] private Inventory _inventory;
+    [Range(1f, 3f)] public float Radius;
     SphereCollider grabCollider;
 
-    [SerializeField]
-    private Inventory _inventory;
+    private GenerateGrenade _generateGrenade;
 
     private void Awake()
     {
         grabCollider = GetComponent<SphereCollider>();
+        _generateGrenade = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GenerateGrenade>();
+
     }
 
     void Update()
@@ -25,7 +26,7 @@ public class GrabGrenade : MonoBehaviour
     {
         if (other.GetComponent<GrenadeObject>() && other.GetComponent<GrenadeObject>().ReadyToGrab)
         {
-            
+            _generateGrenade.GenerateNewGrenate(other.transform.position);
             other.GetComponent<GrenadeObject>().ReadyToGrab = false;
             _inventory.AddInventory(other.GetComponent<GrenadeObject>()._assetGrenade);
             Destroy(other.gameObject);

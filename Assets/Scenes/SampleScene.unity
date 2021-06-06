@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 57537498}
   m_Layer: 0
   m_Name: Game Manager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,14 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858e9f8bb80153c4c856a4db7e735eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerReSpawnGrenade: 5
+  worldBorderXZ: {fileID: 335499551}
+  worldBorderMinusXZ: {fileID: 494829173}
   MaxReSpawnQuantityGrenade: 1
+  timerReSpawnGrenade: 5
   Grenade:
   - {fileID: 5052404383252764889, guid: 15cfbb887844bff49b114daf7b670a6d, type: 3}
   - {fileID: 9214035709501215591, guid: 04b3146637bc2fb45b0a4a2231bc5c2f, type: 3}
   - {fileID: 8164609851668043238, guid: 4d00aed0cb90ad24d930839e348fbc49, type: 3}
-  worldBorderXZ: {fileID: 335499551}
-  worldBorderMinusXZ: {fileID: 494829173}
 --- !u!1 &211783119
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e6ece45f898cc4c826689510084fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grenadesList: []
   viewInventoryTransform: {fileID: 553276642}
   _inventoryCell: {fileID: 5521019869824192554, guid: af5e5283e0cbbcf418c1da97db7d05cf,
     type: 3}
@@ -1226,8 +1225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7a2b384457ee4408c190c65b724611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 1
   _inventory: {fileID: 553276646}
+  Radius: 1
 --- !u!1 &1624518612
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<AssetGrenade> grenadesList = new List<AssetGrenade>();
     [SerializeField] private Transform viewInventoryTransform;
     [SerializeField] private InventoryCell _inventoryCell;
     [SerializeField] private PlayerFire _playerFire;
