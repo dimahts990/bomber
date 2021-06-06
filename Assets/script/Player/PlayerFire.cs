@@ -15,7 +15,6 @@ public class PlayerFire : MonoBehaviour
 
     private float g = Physics.gravity.y, vShot;
     private Vector3 fromTo, fromToXZ;
-    //private bool shotReadyBool = false;
 
     private void Update()
     {

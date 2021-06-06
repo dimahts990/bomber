@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2999186706354164571}
   - component: {fileID: 8404257821736802824}
   - component: {fileID: 7845236836692909956}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: radiusDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 2857099469340893890}
   - component: {fileID: 2949357123855449940}
   - component: {fileID: -179956803344322399}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Low Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7a63b1d5e83a4a8fe3ec59f9653a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ForNPC: 0
   radiusDamageGameObject: {fileID: 1197023697242181789}
   _assetGrenade: {fileID: 11400000, guid: fe119904ded8ab04c8e9c420a1cfa2d9, type: 2}
   BoomParticalSystem: {fileID: 190013086483691308, guid: 7b7898d5fcb3b4049bb597ce2c026780,

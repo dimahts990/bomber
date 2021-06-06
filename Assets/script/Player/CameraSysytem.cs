@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class CameraSysytem : MonoBehaviour
 
     private void LateUpdate()
     {
-        try
+        if (playerTransform != null)
         {
             playerPosition = playerTransform.position;
             camPositionNew.x += (playerPosition.x - camPositionOld.x) * speedMoveCam.x * Time.deltaTime;
@@ -27,11 +28,6 @@ public class CameraSysytem : MonoBehaviour
             camPositionNew.z += (playerPosition.z - camPositionOld.z) * speedMoveCam.z * Time.deltaTime;
             transform.position = (camPositionStart + camPositionNew) + ShiftCam;
             camPositionOld = camPositionNew;
-
-        }
-        catch
-        {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 }

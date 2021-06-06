@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class GrenadeObject : MonoBehaviour
 {
-    [SerializeField] private GameObject radiusDamageGameObject;
+    [Header("Если граната для NPC, поставить флаг")] [SerializeField]
+    private bool ForNPC;
+    
+    [Space] [SerializeField]
+    private GameObject radiusDamageGameObject;
     public AssetGrenade _assetGrenade;
     public GameObject BoomParticalSystem;
     public bool ReadyToGrab = true;
@@ -13,24 +17,51 @@ public class GrenadeObject : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (!ReadyToGrab && other.gameObject.layer!=8)
+        if (other.gameObject.layer != 2)
         {
-            Instantiate(BoomParticalSystem, transform.position, Quaternion.identity).transform.SetParent(null);
-            if (other.gameObject.GetComponent<NPCController>())
-                Boom(other.gameObject);
-            else
-                radiusDamageGameObject.SetActive(true);
+            switch (ForNPC)
+            {
+                case true:
+                    if (!ReadyToGrab && other.gameObject.layer != 9)
+                    {
+                        Instantiate(BoomParticalSystem, transform.position, Quaternion.identity).transform
+                            .SetParent(null);
+                        if (other.gameObject.GetComponent<PlayerController>())
+                            BoomPlayer(other.gameObject);
+                        else
+                            radiusDamageGameObject.SetActive(true);
+                    }
+
+                    break;
+                case false:
+                    if (!ReadyToGrab && other.gameObject.layer != 8)
+                    {
+                        Instantiate(BoomParticalSystem, transform.position, Quaternion.identity).transform
+                            .SetParent(null);
+                        if (other.gameObject.GetComponent<NPCController>())
+                            BoomNPC(other.gameObject);
+                        else
+                            radiusDamageGameObject.SetActive(true);
+                    }
+
+                    break;
+            }
         }
     }
 
-    public void Boom(GameObject target=null)
+    public void BoomNPC(GameObject target=null)
     {
         if(target!=null)
             target.GetComponent<NPCController>().DamageMe(Damage);
         
         Destroy(gameObject);
-
     }
     
-    //TODO:сделать взрыв (в AssetGrenade есть параметр _DamageRadius)
+    public void BoomPlayer(GameObject target=null)
+    {
+        if(target!=null)
+            target.GetComponent<PlayerController>().DamageMe(Damage);
+        
+        Destroy(gameObject);
+    }
 }

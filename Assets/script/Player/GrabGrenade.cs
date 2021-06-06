@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class GrabGrenade : MonoBehaviour
 {
     [SerializeField] private Inventory _inventory;

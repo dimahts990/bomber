@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2949357123855449940}
   - component: {fileID: 639991475757384060}
   m_Layer: 2
-  m_Name: Hight Grenade
+  m_Name: Grenade for NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aaa9a7d2657f3d3498a933a1e8aaad0e, type: 2}
+  - {fileID: 2100000, guid: 1a79a40e9cb199d4fb854ad3c097a970, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -231,13 +231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec7a63b1d5e83a4a8fe3ec59f9653a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForNPC: 0
+  ForNPC: 1
   radiusDamageGameObject: {fileID: 6570867154484587115}
   _assetGrenade: {fileID: 11400000, guid: 880c089f3301e3146996782fd0af83d0, type: 2}
   BoomParticalSystem: {fileID: 190013086483691308, guid: 7b7898d5fcb3b4049bb597ce2c026780,
     type: 3}
   ReadyToGrab: 0
-  Damage: 50
+  Damage: 15
 --- !u!1 &6570867154484587115
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.00001
+  m_Radius: 2.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2842658942837745010
 MonoBehaviour:

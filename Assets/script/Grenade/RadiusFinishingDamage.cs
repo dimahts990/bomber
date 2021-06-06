@@ -15,8 +15,10 @@ public class RadiusFinishingDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<NPCController>())
-            transform.parent.GetComponent<GrenadeObject>().Boom(other.gameObject);
+            transform.parent.GetComponent<GrenadeObject>().BoomNPC(other.gameObject);
+        else if (other.gameObject.GetComponent<PlayerController>())
+            transform.parent.GetComponent<GrenadeObject>().BoomPlayer(other.gameObject);
         else
-            transform.parent.GetComponent<GrenadeObject>().Boom();
+            transform.parent.GetComponent<GrenadeObject>().BoomNPC();
     }
 }
