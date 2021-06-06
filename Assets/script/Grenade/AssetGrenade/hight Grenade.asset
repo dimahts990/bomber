@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 904060f437b344c49da3d853f1693268, type: 3}
+  m_Name: hight Grenade
+  m_EditorClassIdentifier: 
+  _name: "\u0421\u0438\u043B\u044C\u043D\u0430\u044F \u0433\u0440\u0430\u043D\u0430\u0442\u0430"
+  _Icon: {fileID: 21300000, guid: c0544dfb237f4154bb41bba15f2b58ec, type: 3}
+  _DamageRadius: 5
+  _GrenadeGameObject: {fileID: 3083217367016239520, guid: a3961a08f8996654f8450d3d805152fa,
+    type: 3}
